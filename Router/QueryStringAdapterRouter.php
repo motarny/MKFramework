@@ -24,7 +24,7 @@ class QueryStringAdapterRouter extends RouterAbstract
         return new self();
     }
 
-    protected function prepareRoutingVariables()
+    public function prepareRoutingVariables()
     {
         $urlQueryElements = $this->getRoutingOption('urlQueryElements');
         

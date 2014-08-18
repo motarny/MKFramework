@@ -40,6 +40,11 @@ class Director
     {
         self::$directorInstance->_router = $routerObject;
     }
+    
+    static public function getRouter()
+    {
+        return self::$directorInstance->_router;
+    }
 
     static public function setView(View\View $view)
     {

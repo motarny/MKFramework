@@ -35,6 +35,8 @@ abstract class RouterAbstract
      * @access protected
      */
     protected $_jobName;
+    
+    protected $_shortcuts = array();
 
     protected $_routingOptions;
 
@@ -118,7 +120,7 @@ abstract class RouterAbstract
         }
     }
 
-    abstract protected function prepareRoutingVariables();
+    abstract public function prepareRoutingVariables();
 
     protected function setModuleName($value)
     {
@@ -134,6 +136,33 @@ abstract class RouterAbstract
     {
         $this->_jobName = strtolower($value);
     }
+    
+    
+    public function addShortcut($url, $redirectTo)
+    {
+        $url = trim($url, ' ' . DIRECTORY_SEPARATOR);
+        $this->_shortcuts[$url] = $redirectTo;
+       
+    }
+    
+    
+    protected function checkForShortcuts($url)
+    {
+        
+        if (array_key_exists($url, $this->_shortcuts))
+        {
+            list($module, $controller, $job) = explode(DIRECTORY_SEPARATOR, $this->_shortcuts[$url]);
+            $this->setModuleName($module);
+            $this->setControllerName($controller);
+            $this->setJobName($job);
+            
+            return true;
+        }
+        
+        return false;
+    }
+    
+    
 }
 
 ?>

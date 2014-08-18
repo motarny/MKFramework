@@ -26,6 +26,7 @@ final class Launcher
         // Initialize Autoloader.
         require_once 'Autoloader/Autoloader.php';
         Autoloader::init();
+        Autoloader::addLoaderPath(APPLICATION_PATH);
         Autoloader::addLoaderPath(APPLICATION_PATH . DIRECTORY_SEPARATOR . 'public');
         
         // Now, when we have Autoloader initialized, load app configuration to framework Registry...
@@ -35,6 +36,7 @@ final class Launcher
         Director::init();
 
         // Of course, we need some routing functions.
+        
         $router = (new Router\Factory(Director::getAppConfig('routerAdapter')));
         Director::setRouter($router->getRouter());
         

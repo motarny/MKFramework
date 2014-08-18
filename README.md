@@ -1,7 +1,8 @@
-NessunFramework
+MKFramework
 ===============
 
-To jest framework oparty w całości o wzorzec MVC. Przeznaczenie edukacyjne.
+Przeznaczenie edukacyjno-eksperymentalne.
 
 
-working example:  http://projects.mktest.pl/NessunFramework/Examples/Core/public/
+working examples:  http://projects.mktest.pl/MKFrameworkExamples
+
