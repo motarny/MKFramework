@@ -10,23 +10,20 @@ abstract class BootstrapAbstract
 {
 
     function __construct()
-    {
-    }
+    {}
 
-    
-    public function initAutoloaderPaths()
+    public function launchAutoloaderPaths()
     {
         // default models path
         Autoloader::addLoaderPath(APPLICATION_PATH . DIRECTORY_SEPARATOR . 'model');
     }
-    
-    
+
     /**
      * Uruchamia metody bootstrapa
      */
     public function init()
     {
-        $initActions = $this->getInitActions();
+        $initActions = $this->getLaunchActions();
         foreach ($initActions as $methodName) {
             $this->$methodName();
         }
@@ -37,16 +34,16 @@ abstract class BootstrapAbstract
     //
     
     /**
-     * Zwraca list� metod w klasie Bootstrapper w formacie init***** do uruchomienia
+     * Zwraca list� metod w klasie Bootstrapper w formacie launch***** do uruchomienia
      *
      * @return array
      */
-    protected function getInitActions()
+    protected function getLaunchActions()
     {
         $classMethods = get_class_methods($this);
         return array_filter($classMethods, function ($methodName)
         {
-            $pattern = '/^init[A-Z]{1,}[a-zA-Z0-9]{0,}$/';
+            $pattern = '/^launch[A-Z]{1,}[a-zA-Z0-9]{0,}$/';
             return preg_match($pattern, $methodName);
         });
     }

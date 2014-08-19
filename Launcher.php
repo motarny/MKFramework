@@ -1,5 +1,4 @@
 <?php
-
 namespace MKFramework;
 
 define('REGISTRY_DEFAULT_NAMESPACE', 'default');
@@ -13,6 +12,7 @@ use MKFramework\Director;
 use MKFramework\Router;
 use MKFramework\View\View;
 use MKFramework\View\Layout;
+use MKFramework\Exception\Exception;
 
 final class Launcher
 {
@@ -22,7 +22,7 @@ final class Launcher
 
     public static function launchFrameworkApplication($configFile)
     {
-      
+        
         // Initialize Autoloader.
         require_once 'Autoloader/Autoloader.php';
         Autoloader::init();
@@ -32,17 +32,25 @@ final class Launcher
         // Now, when we have Autoloader initialized, load app configuration to framework Registry...
         Registry::set(null, new Config($configFile), REGISTRY_CORE_NAMESPACE);
         
-        // ...and then, initialize Director, which holds everything 
+        // ...and then, initialize Director, which holds everything
         Director::init();
-
+        
         // Of course, we need some routing functions.
         
-        $router = (new Router\Factory(Director::getAppConfig('routerAdapter')));
+        $router = new Router\Factory(Director::getAppConfig('routerAdapter'));
         Director::setRouter($router->getRouter());
+//        define('MODULE_PATH', APPLICATION_PATH . DIRECTORY_SEPARATOR . 'modules' . DIRECTORY_SEPARATOR . Director::getModuleName());
         
         // Good moment for launchinch some required actions from application Bootstrap.php file.
         $bootstrap = new \Bootstrap();
         $bootstrap->init();
+        
+        // Also launch module bootstrap if exists.
+        if (file_exists(MODULE_PATH . DIRECTORY_SEPARATOR . 'ModuleBootstrap.php')) {
+            Autoloader::addLoaderPath(MODULE_PATH);
+            $bootstrapModule = new \ModuleBootstrap();
+            $bootstrapModule->init();
+        }
         
         // Let's director holds Layout functionalities...
         Director::setLayout(new Layout());
@@ -50,11 +58,9 @@ final class Launcher
         // ...and View, for specific Controllers Jobs (View holds Controller/Job result).
         Director::setView(new View());
         
-        
         // So, now everything is set up and we can launch Conntroller Job
         self::doTheDance();
     }
-
 
     /**
      * Uruchamia Controller/Job
@@ -69,7 +75,7 @@ final class Launcher
         
         $controllerClassName = ucfirst($openController) . 'Controller';
         
-        Autoloader::addLoaderPath(APPLICATION_PATH . DIRECTORY_SEPARATOR . 'modules' . DIRECTORY_SEPARATOR . $openModule . DIRECTORY_SEPARATOR . 'controller');
+        Autoloader::addLoaderPath(MODULE_PATH . DIRECTORY_SEPARATOR . 'controller');
         
         // uruchom odpowiedni Job kontrolera
         $controller = new $controllerClassName();
@@ -77,7 +83,7 @@ final class Launcher
         $jobContent = $controller->getJobContent($launchJob);
         Director::getView()->setJobContent($jobContent);
         
-        $render = Render\Factory::getRenderer('screen');  // empty value = screen, try 'file' adapter
+        $render = Render\Factory::getRenderer('screen'); // empty value = screen, try 'file' adapter
         
         Director::getLayout()->setLayoutFile('default');
         

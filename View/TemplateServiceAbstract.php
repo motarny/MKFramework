@@ -1,6 +1,8 @@
 <?php
 namespace MKFramework\View;
 
+use MKFramework\Director;
+
 class TemplateServiceAbstract
 {
 
@@ -9,9 +11,13 @@ class TemplateServiceAbstract
     protected $_tplExtension = 'phtml';
 
     protected $_isDisabled = false;
+    
+    protected $_helper;
 
     function __construct()
-    {}
+    {
+        $this->_helper = new Helper();
+    }
 
     /**
      * Daje mo�liwo�� ustawiania zmiennej do widoku
@@ -34,30 +40,36 @@ class TemplateServiceAbstract
      */
     public function __get($variable)
     {
+        if ($variable == 'helper')
+        {
+            return $this->_helper;
+        }
         return $this->_variables[$variable];
     }
-
 
     public function isDisabled()
     {
         return $this->_isDisabled;
     }
-    
+
     public function disable()
     {
         $this->_isDisabled = true;
     }
-    
+
     public function enable()
     {
         $this->_isDisabled = false;
     }
 
-
     public function getAllVariables()
     {
         return $this->_variables;
     }
+    
+   
+    
+    
 }
 
 

@@ -3,7 +3,7 @@ namespace MKFramework\Render;
 
 class FileAdapterRender extends RenderAbstract
 {
- 
+
     static function getRenderer()
     {
         return new self();
@@ -17,11 +17,6 @@ class FileAdapterRender extends RenderAbstract
         
         echo $content;
     }
-    
-    
-    
-    
-    
 }
 
 ?>

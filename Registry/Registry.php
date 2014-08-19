@@ -4,7 +4,6 @@ namespace MKFramework\Registry;
 use MKFramework;
 use MKFramework\Exception\Exception;
 
-
 class Registry
 {
 

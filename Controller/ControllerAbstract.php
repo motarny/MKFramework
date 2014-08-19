@@ -9,7 +9,7 @@ abstract class ControllerAbstract
     protected $_director;
 
     protected $view;
-    
+
     protected $layout;
 
     function __construct()
@@ -47,8 +47,6 @@ abstract class ControllerAbstract
         // TODO $this->view->show() // lub cos podobnego
         
         return $viewOutput;
-        
-        
     }
 
     public function __call($actionName, $sec)

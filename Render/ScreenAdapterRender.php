@@ -3,7 +3,7 @@ namespace MKFramework\Render;
 
 class ScreenAdapterRender extends RenderAbstract
 {
- 
+
     static function getRenderer()
     {
         return new self();
@@ -15,11 +15,6 @@ class ScreenAdapterRender extends RenderAbstract
         
         echo $content;
     }
-    
-    
-    
-    
-    
 }
 
 ?>

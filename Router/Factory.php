@@ -16,7 +16,6 @@ class Factory
 
     public function getRouter()
     {
-        
         $namespacePrefix = 'MKFramework\Router';
         $className = $namespacePrefix . '\\' . ucfirst($this->_adapterName) . 'AdapterRouter';
         
@@ -25,10 +24,10 @@ class Factory
         }
         
         $this->_adapter = $className::getInstance();
-
+        
         // Add routing tracks if defined
         $router = $this->_adapter;
-        include_once APPLICATION_PATH . DIRECTORY_SEPARATOR . 'Routetracks.php';        
+        include_once APPLICATION_PATH . DIRECTORY_SEPARATOR . 'Routetracks.php';
         
         $this->_adapter->prepareRoutingVariables();
         

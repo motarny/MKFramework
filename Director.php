@@ -40,7 +40,7 @@ class Director
     {
         self::$directorInstance->_router = $routerObject;
     }
-    
+
     static public function getRouter()
     {
         return self::$directorInstance->_router;
@@ -55,12 +55,12 @@ class Director
     {
         return self::$directorInstance->_view;
     }
-    
+
     static public function setLayout(View\Layout $layout)
     {
         self::$directorInstance->_layout = $layout;
     }
-    
+
     static public function getLayout()
     {
         return self::$directorInstance->_layout;
@@ -80,12 +80,12 @@ class Director
     {
         return self::$directorInstance->_router->getJobName();
     }
-    
+
     static public function getDbSupport()
     {
         return self::$directorInstance->_dbSupport;
     }
-    
+
     static public function setDbSupport($db)
     {
         self::$directorInstance->_dbSupport = $db;
