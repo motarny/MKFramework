@@ -34,5 +34,3 @@ class Factory
         return $this->_adapter;
     }
 }
-
-?>

@@ -4,5 +4,3 @@ namespace MKFramework\Config;
 abstract class Loader
 {
 }
-
-?>

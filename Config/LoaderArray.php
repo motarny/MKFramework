@@ -9,5 +9,3 @@ class LoaderArray extends Loader
         return $this->_configLoad;
     }
 }
-
-?>

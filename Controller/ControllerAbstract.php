@@ -61,5 +61,3 @@ abstract class ControllerAbstract
         // throw new \MKFramework\Exception\Exception("nie ma akcji <b>{$actionName}</b> w tym kontrolerze");
     }
 }
-
-?>

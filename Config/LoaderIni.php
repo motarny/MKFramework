@@ -10,5 +10,3 @@ class LoaderIni extends Loader
         return parse_ini_file('../' . $this->_configLoad, false);
     }
 }
-
-?>

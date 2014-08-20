@@ -17,9 +17,7 @@ abstract class Loader
     }
 
     /**
-     * Zwraca tablic¹½ z konfiguracj¹½ - format domyœlny, do rejestru
+     * Zwraca tablicï¿½ï¿½ z konfiguracjï¿½ï¿½ - format domyï¿½lny, do rejestru
      */
     abstract protected function parseConfig();
 }
-
-?>

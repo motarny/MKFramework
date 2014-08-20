@@ -91,5 +91,3 @@ class Registry
         self::$_registry->_namespace = $namespace;
     }
 }
-
-?>

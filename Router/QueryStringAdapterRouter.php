@@ -54,5 +54,3 @@ class QueryStringAdapterRouter extends RouterAbstract
         }
     }
 }
-
-?>

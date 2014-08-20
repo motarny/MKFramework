@@ -48,5 +48,3 @@ class Layout extends TemplateServiceAbstract
         return $this->_viewContent;
     }
 }
-
-?>

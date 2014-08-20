@@ -12,6 +12,7 @@ use MKFramework\Director;
 use MKFramework\Router;
 use MKFramework\View\View;
 use MKFramework\View\Layout;
+use MKFramework\Session\Session;
 use MKFramework\Exception\Exception;
 
 final class Launcher
@@ -35,11 +36,19 @@ final class Launcher
         // ...and then, initialize Director, which holds everything
         Director::init();
         
-        // Of course, we need some routing functions.
+        // Let's start the session
+        Director::setSession(Session::getInstance(Director::getAppConfig('sessionAdapter')));
         
+        // Of course, we need some routing functions.        
         $router = new Router\Factory(Director::getAppConfig('routerAdapter'));
         Director::setRouter($router->getRouter());
-//        define('MODULE_PATH', APPLICATION_PATH . DIRECTORY_SEPARATOR . 'modules' . DIRECTORY_SEPARATOR . Director::getModuleName());
+        // define('MODULE_PATH', APPLICATION_PATH . DIRECTORY_SEPARATOR . 'modules' . DIRECTORY_SEPARATOR . Director::getModuleName());
+        
+        // Let's director holds Layout functionalities...
+        Director::setLayout(new Layout());
+        
+        // ...and View, for specific Controllers Jobs (View holds Controller/Job result).
+        Director::setView(new View());
         
         // Good moment for launchinch some required actions from application Bootstrap.php file.
         $bootstrap = new \Bootstrap();
@@ -52,14 +61,12 @@ final class Launcher
             $bootstrapModule->init();
         }
         
-        // Let's director holds Layout functionalities...
-        Director::setLayout(new Layout());
-        
-        // ...and View, for specific Controllers Jobs (View holds Controller/Job result).
-        Director::setView(new View());
-        
         // So, now everything is set up and we can launch Conntroller Job
         self::doTheDance();
+        
+        
+        // Sometimes something must be done after all
+        Director::finish(); 
     }
 
     /**
@@ -88,6 +95,7 @@ final class Launcher
         Director::getLayout()->setLayoutFile('default');
         
         $render->render();
+        
     }
 }
 

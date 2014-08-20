@@ -18,5 +18,3 @@ class Factory
         return $className::getRenderer();
     }
 }
-
-?>

@@ -22,5 +22,3 @@ class Exception extends \Exception
         die();
     }
 }
-
-?>

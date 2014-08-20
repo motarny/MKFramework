@@ -22,5 +22,3 @@ abstract class RenderAbstract
         return $layout->render();
     }
 }
-
-?>

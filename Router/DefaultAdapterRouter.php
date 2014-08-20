@@ -54,5 +54,3 @@ class DefaultAdapterRouter extends RouterAbstract
     }
     
 }
-
-?>

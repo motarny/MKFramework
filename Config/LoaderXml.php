@@ -9,5 +9,3 @@ class LoaderXml extends Loader
         echo 'parsuje XML';
     }
 }
-
-?>

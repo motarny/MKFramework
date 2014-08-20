@@ -16,5 +16,3 @@ class ScreenAdapterRender extends RenderAbstract
         echo $content;
     }
 }
-
-?>

@@ -68,6 +68,22 @@ class TemplateServiceAbstract
     }
     
    
+    public function translate($message)
+    {
+        $multilang = Director::getMultilang();
+        
+        if (!empty($multilang))
+        {
+            return $multilang->translate($message);
+        }
+        return $message;
+    }
+    
+    public function _($message)
+    {
+        return $this->translate($message);
+    }
+    
     
     
 }

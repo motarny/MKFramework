@@ -4,6 +4,8 @@ namespace MKFramework;
 use MKFramework\Registry\Registry;
 use MKFramework\Router\RouterAbstract;
 use MKFramework\View;
+use MKFramework\Session\Session;
+use MKFramework\Multilang\MultilangAbstract;
 
 class Director
 {
@@ -21,6 +23,13 @@ class Director
         }
     }
 
+    
+    static public function finish()
+    {
+        include_once APPLICATION_PATH . DIRECTORY_SEPARATOR . 'Finish.php';
+    }
+    
+    
     static public function getInstance()
     {
         if (empty(self::$directorInstance)) {
@@ -45,10 +54,30 @@ class Director
     {
         return self::$directorInstance->_router;
     }
+    
+    static public function setMultilang(MultilangAbstract $multilangObject)
+    {
+        self::$directorInstance->_multilang = $multilangObject;
+    }
+    
+    static public function getMultilang()
+    {
+        return self::$directorInstance->_multilang;
+    }
 
     static public function setView(View\View $view)
     {
         self::$directorInstance->_view = $view;
+    }
+
+    static public function getSession()
+    {
+        return self::$directorInstance->_session;
+    }
+
+    static public function setSession(Session $session)
+    {
+        self::$directorInstance->_session = $session;
     }
 
     static public function getView()
@@ -91,5 +120,3 @@ class Director
         self::$directorInstance->_dbSupport = $db;
     }
 }
-
-?>

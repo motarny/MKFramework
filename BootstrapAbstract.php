@@ -47,4 +47,6 @@ abstract class BootstrapAbstract
             return preg_match($pattern, $methodName);
         });
     }
+    
+    
 }

@@ -18,5 +18,3 @@ class FileAdapterRender extends RenderAbstract
         echo $content;
     }
 }
-
-?>
