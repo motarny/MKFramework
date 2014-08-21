@@ -92,9 +92,9 @@ class Helper
      *            = array('module' => MODULE, 'controller' => CONTROLLER, 'job' => JOB, 'params' => array(PARAMS))
      *            
      */
-    public function getUrl($routing)
+    public function getUrl($routingArray)
     {
         $router = MKFramework\Director::getRouter();
-        return $router->prepareUrl($routing);
+        return $router->prepareUrl($routingArray);
     }
 }

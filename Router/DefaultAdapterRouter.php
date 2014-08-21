@@ -47,7 +47,9 @@ class DefaultAdapterRouter extends RouterAbstract
         
         $params         = $routingParams['params'];
         
-        $preparedUrl = DOCUMENT_ROOT . DIRECTORY_SEPARATOR . $module . DIRECTORY_SEPARATOR . $controller . DIRECTORY_SEPARATOR . $job;
+        if (!empty($params)) $paramsList = DIRECTORY_SEPARATOR . '$' . str_replace('&', ';', http_build_query($params));
+        
+        $preparedUrl = DOCUMENT_ROOT . DIRECTORY_SEPARATOR . $module . DIRECTORY_SEPARATOR . $controller . DIRECTORY_SEPARATOR . $job . $paramsList;
         
         return $preparedUrl;
         

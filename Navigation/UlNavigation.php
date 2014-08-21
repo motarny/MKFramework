@@ -14,6 +14,7 @@ class UlNavigation extends NavigationAbstract
     protected $_cssClasses = array(
         'levelPrefix' => 'level_',
         'ul' => 'ulclass',
+        'rootUl' => 'root',
         'liLink' => 'link',
         'liNoLink' => 'noLink',
         'separator' => 'separator'
@@ -24,7 +25,7 @@ class UlNavigation extends NavigationAbstract
     {
         $cssDef = $this->_cssClasses;
         
-        $startTag = "<ul class=\"{$cssDef['ul']}\">";
+        $startTag = "<ul class=\"{$cssDef['rootUl']}\">";
         $endTag = "</ul>";
         
         $nav = $this->_navigationElements;
@@ -68,14 +69,13 @@ class UlNavigation extends NavigationAbstract
         $link = $this->tool_renderLink($element);
         
         $levelClass = $cssDef['levelPrefix'] . $level;
-        
-        $getHtmlElement = "<li class=\"{$levelClass} {$liClass} {$element['cssClass']}\">{$link}</li>";
-        
+
         if (is_array($element['content'])) {
             $subUlContent = '';
             $subUlContent = $this->tool_renderUlContent($element['content'], ++ $level);
-            $getHtmlElement .= $subUlContent;
-        }
+        }        
+        
+        $getHtmlElement = "<li class=\"{$levelClass} {$liClass} {$element['cssClass']}\">{$link}{$subUlContent}</li>";
         
         return $getHtmlElement;
     }

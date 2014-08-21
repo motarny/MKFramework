@@ -22,6 +22,7 @@ class View extends TemplateServiceAbstract
     {
         if (! $this->isDisabled()) {
             $v = $this;
+            $view = $this;
             ob_start();
             include $this->_viewFile;
             $cont = ob_get_clean();
@@ -43,6 +44,11 @@ class View extends TemplateServiceAbstract
     public function setView($controller, $job)
     {
         $this->_viewFile = MODULE_PATH . DIRECTORY_SEPARATOR . 'view' . DIRECTORY_SEPARATOR . ucfirst($controller) . DIRECTORY_SEPARATOR . $job . '.' . $this->_tplExtension;
+    }
+    
+    public function getViewFile()
+    {
+        return $this->_viewFile;
     }
 }
 

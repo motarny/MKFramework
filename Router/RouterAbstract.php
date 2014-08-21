@@ -136,7 +136,7 @@ abstract class RouterAbstract
 
     abstract public function prepareRoutingVariables();
 
-    protected function setModuleName($value)
+    public function setModuleName($value)
     {
         $value = empty($value) ? self::defaultModuleName : $value;
         
@@ -149,7 +149,7 @@ abstract class RouterAbstract
         define('MODULE_PATH', APPLICATION_PATH . DIRECTORY_SEPARATOR . 'modules' . DIRECTORY_SEPARATOR . $value);
     }
 
-    protected function setControllerName($value)
+    public function setControllerName($value)
     {
         $value = empty($value) ? self::defaultControllerName : $value;
         
@@ -161,7 +161,7 @@ abstract class RouterAbstract
         $this->_controllerName = strtolower($value);
     }
 
-    protected function setJobName($value)
+    public function setJobName($value)
     {
         // Checking if Job exists will be done in Controller
         $value = empty($value) ? self::defaultJobName : $value;

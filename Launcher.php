@@ -62,41 +62,17 @@ final class Launcher
         }
         
         // So, now everything is set up and we can launch Conntroller Job
-        self::doTheDance();
+        $openModule = Director::getModuleName();
+        $openController = Director::getControllerName();
+        $launchJob = Director::getJobName();
+        Director::runJob($openModule, $openController, $launchJob);
         
         
         // Sometimes something must be done after all
         Director::finish(); 
     }
 
-    /**
-     * Uruchamia Controller/Job
-     */
-    static public function doTheDance()
-    {
-        
-        // pobierz informacje o routingu
-        $openModule = Director::getModuleName();
-        $openController = Director::getControllerName();
-        $launchJob = Director::getJobName() . 'Job';
-        
-        $controllerClassName = ucfirst($openController) . 'Controller';
-        
-        Autoloader::addLoaderPath(MODULE_PATH . DIRECTORY_SEPARATOR . 'controller');
-        
-        // uruchom odpowiedni Job kontrolera
-        $controller = new $controllerClassName();
-        
-        $jobContent = $controller->getJobContent($launchJob);
-        Director::getView()->setJobContent($jobContent);
-        
-        $render = Render\Factory::getRenderer('screen'); // empty value = screen, try 'file' adapter
-        
-        Director::getLayout()->setLayoutFile('default');
-        
-        $render->render();
-        
-    }
+
 }
 
 

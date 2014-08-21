@@ -1,6 +1,7 @@
 <?php
 namespace MKFramework;
 
+use MKFramework\Autoloader\Autoloader;
 use MKFramework\Registry\Registry;
 use MKFramework\Router\RouterAbstract;
 use MKFramework\View;
@@ -23,13 +24,52 @@ class Director
         }
     }
 
+    static public function runJob($module, $controller, $job)
+    {
+        // always enable on start in case of controllerJob reRun this and there was view/layout disabled
+        self::getView()->enable();
+        self::getLayout()->enable();
+        
+        $router = self::getRouter();
+        
+        $router->setModuleName($module);
+        $router->setControllerName($controller);
+        $router->setJobName($job);
+        
+        self::setRouter($router);
+        
+        $openModule = Director::getModuleName();
+        $openController = Director::getControllerName();
+        $launchJob = Director::getJobName() . 'Job';
+        
+        $controllerClassName = ucfirst($controller) . 'Controller';
+        
+        Autoloader::addLoaderPath(MODULE_PATH . DIRECTORY_SEPARATOR . 'controller');
+        
+        // uruchom odpowiedni Job kontrolera
+        $controller = new $controllerClassName();
+        
+        $jobContent = $controller->getJobContent($launchJob);
+        $render = Render\Factory::getRenderer('screen'); // empty value = screen, try 'file' adapter
+        
+        Director::getLayout()->setLayoutFile('default');
+        Director::getView()->setJobContent($jobContent);
+        
+        $render->render();
+    }
     
+    
+    static public function openUrl($url)
+    {
+        echo "<script lang=javascript>document.location.href='". $url . "'; </script>";
+    }
+    
+
     static public function finish()
     {
         include_once APPLICATION_PATH . DIRECTORY_SEPARATOR . 'Finish.php';
     }
-    
-    
+
     static public function getInstance()
     {
         if (empty(self::$directorInstance)) {
@@ -54,12 +94,12 @@ class Director
     {
         return self::$directorInstance->_router;
     }
-    
+
     static public function setMultilang(MultilangAbstract $multilangObject)
     {
         self::$directorInstance->_multilang = $multilangObject;
     }
-    
+
     static public function getMultilang()
     {
         return self::$directorInstance->_multilang;
