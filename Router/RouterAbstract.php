@@ -44,6 +44,8 @@ abstract class RouterAbstract
     protected $_routingOptions;
 
     protected $_urlParams;
+    
+    protected $_postValues;
 
     /**
      * Returns RouterAbstract Singleton object
@@ -219,5 +221,25 @@ abstract class RouterAbstract
         
     }
     
+    
+    public function isPostRequest()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == "POST") return true;
+        return false;
+    }
+
+    
+    public function getFormData($formFieldName = null)
+    {
+        if (!$this->isPostRequest()) return null;
+        if (empty($this->_postValues))
+        {
+            $this->_postValues = $_POST;
+        }
+        
+        if ($formFieldName == null) return $this->_postValues;
+        
+        return $this->_postValues[$formFieldName];
+    }
     
 }

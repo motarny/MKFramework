@@ -11,7 +11,7 @@ abstract class ControllerAbstract
     protected $view;
 
     protected $layout;
-    
+
     protected $_router;
 
     function __construct()
@@ -22,12 +22,21 @@ abstract class ControllerAbstract
         $this->_router = Director::getRouter();
     }
 
-    
     protected function getParams($param)
     {
         return $this->_router->getParams($param);
     }
-    
+
+    protected function getFormData($formFieldName)
+    {
+        return $this->_router->getFormData($formFieldName);
+    }
+
+    protected function isPostRequest()
+    {
+        return $this->_router->isPostRequest();
+    }
+
     protected function preLauncher()
     {}
 
@@ -46,8 +55,7 @@ abstract class ControllerAbstract
         $checkView = $this->view->getViewFile();
         // Ten warunek jest po to, aby nie nadpisywać ustawienia, jeśli w Jobie kontrollera już ustawiono jakiś plik widoku.
         // Jeśli nie ma ustawionego żadnego pliku widoku, to załaduj zgodnie z defaultowymi ustawieniami
-        if (empty($checkView))
-        {
+        if (empty($checkView)) {
             $this->view->setView($this->_director->getControllerName(), $this->_director->getJobName());
         }
         

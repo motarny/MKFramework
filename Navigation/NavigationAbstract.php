@@ -49,6 +49,10 @@ abstract class NavigationAbstract
 
     public function setCssClasses($options = array())
     {
-        $this->_cssClasses = $options;
+        foreach ($options as $option => $optValue)
+        {
+            $this->_cssClasses[$option] = $optValue;
+        }
+        // $this->_cssClasses = $options;
     }
 }

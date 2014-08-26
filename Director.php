@@ -56,6 +56,7 @@ class Director
         Director::getView()->setJobContent($jobContent);
         
         $render->render();
+        
     }
     
     
@@ -150,13 +151,23 @@ class Director
         return self::$directorInstance->_router->getJobName();
     }
 
-    static public function getDbSupport()
+    static public function getDbalSupport()
     {
         return self::$directorInstance->_dbSupport;
     }
 
-    static public function setDbSupport($db)
+    static public function setDbalSupport($db)
     {
         self::$directorInstance->_dbSupport = $db;
+    }
+
+    static public function getOrmSupport()
+    {
+        return self::$directorInstance->_ormSupport;
+    }
+    
+    static public function setOrmSupport($entityManager)
+    {
+        self::$directorInstance->_ormSupport = $entityManager;
     }
 }
