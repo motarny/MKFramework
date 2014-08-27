@@ -19,7 +19,7 @@ class Layout extends TemplateServiceAbstract
     public function render()
     {
         if (empty($this->_layoutFileFullPath)) {
-            $this->setLayout($this->_layoutFile);
+            $this->setLayoutFile($this->_layoutFile);
         }
         
         if (! $this->isDisabled()) {
@@ -29,6 +29,10 @@ class Layout extends TemplateServiceAbstract
             $cont = ob_get_clean();
             
             return $cont;
+        }
+        else
+        {
+            return $this->getViewContent();
         }
     }
 

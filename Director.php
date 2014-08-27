@@ -45,11 +45,31 @@ class Director
         $controllerClassName = ucfirst($controller) . 'Controller';
         
         Autoloader::addLoaderPath(MODULE_PATH . DIRECTORY_SEPARATOR . 'controller');
+   
+        // obsługa memcache ja poziomie Job
+        // TODO czas z konfiga
+        $memcache = Director::getMemcache();
+        if ($memcache)
+        {
+            $memcacheVar = $module . '_' . $controller . '_' . $job . '_' . serialize($router->getParams());
+            if ($memcache->get($memcacheVar))
+            {
+                $jobContent = $memcache->get($memcacheVar);
+            }
+            else
+            {
+                // uruchom odpowiedni Job kontrolera
+                $controller = new $controllerClassName();
+                $jobContent = $controller->getJobContent($launchJob);
+                $memcache->set($memcacheVar, $jobContent, MEMCACHE_COMPRESSED, 120);
+            }
+        } else 
+        {
+            // uruchom odpowiedni Job kontrolera
+            $controller = new $controllerClassName();
+            $jobContent = $controller->getJobContent($launchJob);            
+        }
         
-        // uruchom odpowiedni Job kontrolera
-        $controller = new $controllerClassName();
-        
-        $jobContent = $controller->getJobContent($launchJob);
         $render = Render\Factory::getRenderer('screen'); // empty value = screen, try 'file' adapter
         
         Director::getLayout()->setLayoutFile('default');
@@ -58,6 +78,27 @@ class Director
         $render->render();
         
     }
+    
+    
+    
+    static public function initMemcache()
+    {
+        // check if enabled
+        $isMemcachedEnabled = \MKFramework\Director::getSession()->isMemcachedEnabled;
+        if ($isMemcachedEnabled)
+        {
+            $memcache = new \Memcache();
+            @$memcache->connect("localhost");
+            self::$directorInstance->_memcache = $memcache;
+        }
+    }
+    
+    
+    static public function getMemcache()
+    {
+        return self::$directorInstance->_memcache;
+    }
+    
     
     
     static public function openUrl($url)

@@ -39,6 +39,10 @@ final class Launcher
         // Let's start the session
         Director::setSession(Session::getInstance(Director::getAppConfig('sessionAdapter')));
         
+        
+        // Init memcache
+        Director::initMemcache();
+        
         // Of course, we need some routing functions.        
         $router = new Router\Factory(Director::getAppConfig('routerAdapter'));
         Director::setRouter($router->getRouter());
