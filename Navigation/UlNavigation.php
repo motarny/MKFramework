@@ -1,8 +1,11 @@
 <?php
 namespace MKFramework\Navigation;
 
+// TODO Dokumentacja
+
 /**
- *
+ * Klasa generująca kod HTML nawigacji z użyciem tagów UL i LI
+ * 
  * @author Marcin
  *        
  */

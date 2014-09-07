@@ -1,6 +1,12 @@
 <?php
 namespace MKFramework\Multilang;
 
+/**
+ * Klasa fabryka dla obsługi wielojęzyczności.
+ * 
+ * @author Marcin
+ *
+ */
 class Factory
 {
 
@@ -8,6 +14,13 @@ class Factory
     {}
     
     
+    /**
+     * Metoda statyczna generująca instancję klasy obsługi wielojęzyczności zgodnie z podanym adapterem.
+     *  
+     * @param string $multilangAdapter adapter wykorzystywany do obsługi wielojęzyczności
+     * @throws \MKFramework\Exception\Exception
+     * @return MultilangAbstract
+     */
     static function getInstance($multilangAdapter)
     {
         $namespacePrefix = 'MKFramework\Multilang';

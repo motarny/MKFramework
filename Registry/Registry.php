@@ -1,6 +1,8 @@
 <?php
 namespace MKFramework\Registry;
 
+// TODO Dokumentacja
+
 use MKFramework;
 use MKFramework\Exception\Exception;
 

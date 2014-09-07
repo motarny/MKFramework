@@ -1,6 +1,8 @@
 <?php
 namespace MKFramework\Render;
 
+// TODO Dokumentacja
+
 use MKFramework\Director;
 
 abstract class RenderAbstract

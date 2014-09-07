@@ -1,11 +1,27 @@
 <?php
 namespace MKFramework\Config;
 
+/**
+ * Klasa obsługująca konfigurację aplikacji.
+ * 
+ * @author Marcin
+ *
+ */
 class Config
 {
 
+    /**
+     * @var array
+     */
     protected $_config;
 
+    
+    /**
+     * Konstruktor klasy Config.
+     * 
+     * @param string $config ścieżka i nazwa pliku z konfiguracją 
+     * @throws \MKFramework\Exception\Exception
+     */
     function __construct($config)
     {
         $formatType = $this->getFormatType($config);
@@ -28,6 +44,13 @@ class Config
         $this->_config = $loader->getConfigArray();
     }
 
+    
+    /**
+     * Metoda wykrywająca jaki typ pliku z konfiguracją został dostarczony.
+     * 
+     * @param string $config ścieżka i nazwa pliku z konfiguracją 
+     * @return string
+     */
     private function getFormatType($config)
     {
         if (is_array($config))
@@ -41,11 +64,22 @@ class Config
         return 'unknow';
     }
 
+    /**
+     * Metoda zwracająca wartość z załadowanej konfiguracji.
+     * 
+     * @param string zmienna
+     * @return mixed
+     */
     public function get($arraypath)
     {
         return $this->_config[$arraypath];
     }
 
+    /**
+     * Metoda zwracająca całą konfigurację w formie tablicy.
+     * 
+     * @return array
+     */
     public function getAll()
     {
         return $this->_config;

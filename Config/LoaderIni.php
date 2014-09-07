@@ -1,6 +1,12 @@
 <?php
 namespace MKFramework\Config;
 
+/**
+ * Klasa odczytująca konfigurację z pliku ini.
+ * 
+ * @author Marcin
+ *
+ */
 class LoaderIni extends Loader
 {
 

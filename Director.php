@@ -8,6 +8,13 @@ use MKFramework\View;
 use MKFramework\Session\Session;
 use MKFramework\Multilang\MultilangAbstract;
 
+/**
+ * Klasa Director służy do wygenerowania i obsługi singletona Director.
+ * Director przechowuje instancje najważniejszych komponentów oraz uruchamia konkretne akcje/Joby
+ *
+ * @author Marcin
+ *
+ */
 class Director
 {
 
@@ -16,7 +23,10 @@ class Director
     function __construct()
     {}
 
-    static public function init()
+    /**
+     * Inicjuje Directora (Singleton).
+     */
+    public static function init()
     {
         if (empty(self::$directorInstance)) {
             self::$directorInstance = new self();
@@ -24,9 +34,27 @@ class Director
         }
     }
 
-    static public function runJob($module, $controller, $job)
+    
+    public static function getInstance()
     {
-        // always enable on start in case of controllerJob reRun this and there was view/layout disabled
+        if (empty(self::$directorInstance)) {
+            self::init();
+        }
+        return self::$directorInstance;
+    }
+    
+
+    /**
+     * Metoda statyczna odpowiedzialna za uruchomienie Joba kontrolera i zwrócenie wygenerowanego widoku,
+     * oraz wrzucenie go do Layoutu i ostatecznie wyrenderowanie wybranym adapterem Render.
+     * 
+     * @param string $module
+     * @param string $controller
+     * @param string $job
+     */
+    public static function runJob($module, $controller, $job)
+    {
+        // Startowo zawsze włącz widok i layout. Joby kontrolera mogą go wyłączyć.
         self::getView()->enable();
         self::getLayout()->enable();
         
@@ -42,11 +70,12 @@ class Director
         $openController = Director::getControllerName();
         $launchJob = Director::getJobName() . 'Job';
         
+        // Zdefiniowanie nazwy klasy kontrolera wymaganego przez request.
         $controllerClassName = ucfirst($controller) . 'Controller';
         
         Autoloader::addLoaderPath(MODULE_PATH . DIRECTORY_SEPARATOR . 'controller');
    
-        // obsługa memcache ja poziomie Job
+        // Obsługa memcache ja poziomie Job - TYMCZASOWO 
         // TODO czas z konfiga
         $memcache = Director::getMemcache();
         if ($memcache)
@@ -75,14 +104,20 @@ class Director
         Director::getLayout()->setLayoutFile('default');
         Director::getView()->setJobContent($jobContent);
         
+        
+        // Zwróć wynik.
         $render->render();
         
     }
     
     
-    
-    static public function initMemcache()
+    /**
+     * Inicjalizacja memcache.
+     */
+    public static function initMemcache()
     {
+        // TODO dodać obsługę sprawdzania, czy jest dostępny!
+        
         // check if enabled
         $isMemcachedEnabled = \MKFramework\Director::getSession()->isMemcachedEnabled;
         if ($isMemcachedEnabled)
@@ -93,121 +128,123 @@ class Director
         }
     }
     
-    
-    static public function getMemcache()
+    /**
+     * Memcache getter.
+     */
+    public static function getMemcache()
     {
         return self::$directorInstance->_memcache;
     }
     
     
     
-    static public function openUrl($url)
+    public static function openUrl($url)
     {
+        // TODO przerobić na header('...
         echo "<script lang=javascript>document.location.href='". $url . "'; </script>";
     }
     
 
-    static public function finish()
+    public static function finish()
     {
         include_once APPLICATION_PATH . DIRECTORY_SEPARATOR . 'Finish.php';
     }
 
-    static public function getInstance()
-    {
-        if (empty(self::$directorInstance)) {
-            self::init();
-        }
-        return self::$directorInstance;
-    }
-
-    static public function getAppConfig($var = null)
+    public static function getAppConfig($var = null)
     {
         if ($var == null)
             return self::$directorInstance->_appConfigurationObj;
         return self::$directorInstance->_appConfigurationObj->get($var);
     }
 
-    static public function setRouter(RouterAbstract $routerObject)
+    
+    /*
+     * 
+     * Gettery i settery głównych komponentów.
+     * 
+     */
+    
+    public static function setRouter(RouterAbstract $routerObject)
     {
         self::$directorInstance->_router = $routerObject;
     }
 
-    static public function getRouter()
+    public static function getRouter()
     {
         return self::$directorInstance->_router;
     }
 
-    static public function setMultilang(MultilangAbstract $multilangObject)
+    public static function setMultilang(MultilangAbstract $multilangObject)
     {
         self::$directorInstance->_multilang = $multilangObject;
     }
 
-    static public function getMultilang()
+    public static function getMultilang()
     {
         return self::$directorInstance->_multilang;
     }
 
-    static public function setView(View\View $view)
+    public static function setView(View\View $view)
     {
         self::$directorInstance->_view = $view;
     }
 
-    static public function getSession()
+    public static function getSession()
     {
         return self::$directorInstance->_session;
     }
 
-    static public function setSession(Session $session)
+    public static function setSession(Session $session)
     {
         self::$directorInstance->_session = $session;
     }
 
-    static public function getView()
+    public static function getView()
     {
         return self::$directorInstance->_view;
     }
 
-    static public function setLayout(View\Layout $layout)
+    public static function setLayout(View\Layout $layout)
     {
         self::$directorInstance->_layout = $layout;
     }
 
-    static public function getLayout()
+    public static function getLayout()
     {
         return self::$directorInstance->_layout;
     }
 
-    static public function getModuleName()
+    public static function getModuleName()
     {
         return self::$directorInstance->_router->getModuleName();
     }
 
-    static public function getControllerName()
+    public static function getControllerName()
     {
         return self::$directorInstance->_router->getControllerName();
     }
 
-    static public function getJobName()
+    public static function getJobName()
     {
         return self::$directorInstance->_router->getJobName();
     }
 
-    static public function getDbalSupport()
+    public static function getDbalSupport()
     {
         return self::$directorInstance->_dbSupport;
     }
 
-    static public function setDbalSupport($db)
+    public static function setDbalSupport($db)
     {
         self::$directorInstance->_dbSupport = $db;
     }
 
-    static public function getOrmSupport()
+    public static function getOrmSupport()
     {
         return self::$directorInstance->_ormSupport;
     }
     
-    static public function setOrmSupport($entityManager)
+    public static function setOrmSupport($entityManager)
     {
         self::$directorInstance->_ormSupport = $entityManager;
     }

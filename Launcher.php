@@ -21,62 +21,78 @@ final class Launcher
     function __construct()
     {}
 
+    
+    /**
+     * Metoda statyczna uruchamiana z pliku startowego aplikacji.
+     *
+     * @param string $configFile
+     */
     public static function launchFrameworkApplication($configFile)
     {
         
-        // Initialize Autoloader.
+        // Inicjalizacja autoloadera
         require_once 'Autoloader/Autoloader.php';
         Autoloader::init();
         Autoloader::addLoaderPath(APPLICATION_PATH);
         Autoloader::addLoaderPath(APPLICATION_PATH . DIRECTORY_SEPARATOR . 'public');
         
-        // Now, when we have Autoloader initialized, load app configuration to framework Registry...
+        // Wczytanie konfiguracji do rejestru
         Registry::set(null, new Config($configFile), REGISTRY_CORE_NAMESPACE);
         
-        // ...and then, initialize Director, which holds everything
+        // Inicjalizacja komponentu Director, który zarządza wykonywaniem całego requesta.
+        // Director przechowuje instancje do głównych komponentów.
         Director::init();
         
-        // Let's start the session
+        // Uruchamiamy sesję.
         Director::setSession(Session::getInstance(Director::getAppConfig('sessionAdapter')));
         
         
-        // Init memcache
+        // Uruchamiamy memcache.
         Director::initMemcache();
         
-        // Of course, we need some routing functions.        
+        // Inicjalizacja komponentu Router, który odczytuje parametry requesta.
+        // Router dodawany jest do Directora.        
         $router = new Router\Factory(Director::getAppConfig('routerAdapter'));
         Director::setRouter($router->getRouter());
-        // define('MODULE_PATH', APPLICATION_PATH . DIRECTORY_SEPARATOR . 'modules' . DIRECTORY_SEPARATOR . Director::getModuleName());
         
-        // Let's director holds Layout functionalities...
+        // Inicjalizacja Layoutu i przypisanie go do Directora.
         Director::setLayout(new Layout());
         
-        // ...and View, for specific Controllers Jobs (View holds Controller/Job result).
+        // Inicjalizacja Widoku i przypisanie go do Directora.
         Director::setView(new View());
         
-        // Good moment for launchinch some required actions from application Bootstrap.php file.
+        // W tym momencie możemy odpalić jakieś zdefiniowane przez klienta automatyczne działania.
+        // Działania określone są w pliku Bootstrap.php w aplikacji
         $bootstrap = new \Bootstrap();
         $bootstrap->init();
         
-        // Also launch module bootstrap if exists.
+        // Oprócz głównego bootstrapa dla aplikacji, możemy także uruchomić bootstrapa dla modułu,
+        // o ile taki bootstrap istnieje.
         if (file_exists(MODULE_PATH . DIRECTORY_SEPARATOR . 'ModuleBootstrap.php')) {
             Autoloader::addLoaderPath(MODULE_PATH);
             $bootstrapModule = new \ModuleBootstrap();
             $bootstrapModule->init();
         }
         
-        // So, now everything is set up and we can launch Conntroller Job
+        // Odczytajmy parametry routingu i wykonajmy odpowiedni Job w kontrolerze.
         $openModule = Director::getModuleName();
         $openController = Director::getControllerName();
         $launchJob = Director::getJobName();
         Director::runJob($openModule, $openController, $launchJob);
         
         
-        // Sometimes something must be done after all
+        // Director spróbuje także odpalić plik Finish.php w aplikacji, jeśli taki istnieje.
+        // W pliku tym możemy wstawić dowolny kod, który ma coś wykonać na sam koniec.
         Director::finish(); 
     }
 
-
+    
+    public function forTest()
+    {
+        return "ok";
+    }
+   
+    
 }
 
 

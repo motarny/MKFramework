@@ -1,6 +1,13 @@
 <?php
 namespace MKFramework\Exception;
 
+/**
+ * Klasa bazowa obsługi wyjątków w MK Framework.
+ * !! DO IMPLEMENTACJI !!
+ * 
+ * @author Marcin
+ *
+ */
 class Exception extends \Exception
 {
 

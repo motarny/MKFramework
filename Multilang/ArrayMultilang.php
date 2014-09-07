@@ -1,6 +1,8 @@
 <?php
 namespace MKFramework\Multilang;
 
+// TODO Dokumentacja
+
 class ArrayMultilang extends MultilangAbstract
 {
 

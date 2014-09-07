@@ -1,6 +1,9 @@
 <?php
 namespace MKFramework\View;
 
+// TODO Dokumentacja
+// TODO Rozważyć wyodrębnienie poszczególnych helperów do osobnych klas
+
 use MKFramework;
 use MKFramework\Director;
 

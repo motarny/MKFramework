@@ -1,6 +1,8 @@
 <?php
 namespace MKFramework\View;
 
+// TODO Dokumentacja
+
 use MKFramework\Director;
 
 class Layout extends TemplateServiceAbstract

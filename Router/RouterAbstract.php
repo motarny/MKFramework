@@ -1,6 +1,8 @@
 <?php
 namespace MKFramework\Router;
 
+// TODO Dokumentacja
+
 use MKFramework\Exception\Exception;
 use MKFramework\Autoloader\Autoloader;
 

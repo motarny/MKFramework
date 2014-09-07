@@ -6,17 +6,30 @@ use MKFramework\Config\Config as Config;
 use MKFramework\View\View as View;
 use MKFramework\Autoloader\Autoloader;
 
+/**
+ * Klasa abstrakcyjna dla bootstrapa.
+ * Zawiera podstawowe narzędzia do uruchamiania metod 
+ * jak i kilka standardowych, zawsze uruchamianych metod. 
+ * @author Marcin
+ *
+ */
 abstract class BootstrapAbstract
 {
 
     function __construct()
     {}
 
+    /**
+     * Dodaje do ściezki autoloadera folder 'model' z głównego katalogu aplikacji.
+     */
     public function launchAutoloaderPaths()
     {
         // default models path
         Autoloader::addLoaderPath(APPLICATION_PATH . DIRECTORY_SEPARATOR . 'model');
     }
+    
+    
+    
 
     /**
      * Uruchamia metody bootstrapa
@@ -29,12 +42,9 @@ abstract class BootstrapAbstract
         }
     }
     
-    // Funkcje standardowe, kt�re si� musz� zawsze odpali�
-    //
-    //
     
     /**
-     * Zwraca list� metod w klasie Bootstrapper w formacie launch***** do uruchomienia
+     * Zwraca listę metod w klasie Bootstrapper w formacie launch***** do uruchomienia.
      *
      * @return array
      */

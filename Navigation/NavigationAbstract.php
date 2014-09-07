@@ -1,6 +1,8 @@
 <?php
 namespace MKFramework\Navigation;
 
+// TODO Dokumentacja
+
 use MKFramework;
 
 /**

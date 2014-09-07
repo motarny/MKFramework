@@ -1,6 +1,8 @@
 <?php
 namespace MKFramework\Router;
 
+// TODO Dokumentacja
+
 class DefaultAdapterRouter extends RouterAbstract
 {
 

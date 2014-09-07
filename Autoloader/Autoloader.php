@@ -1,6 +1,14 @@
 <?php
 namespace MKFramework\Autoloader;
 
+/**
+ * Klasa obsługująca automatyczne ładowanie klas.
+ * Obsługa obejmuje zarówno komponenty frameworka jak i kontrolery
+ * oraz modele w aplikacji.
+ * 
+ * @author Marcin
+ *
+ */
 class Autoloader
 {
 
@@ -9,19 +17,30 @@ class Autoloader
     function __construct()
     {}
 
+    /**
+     * Metoda statyczna zwracająca instancję autoloadera.
+     * 
+     * @return \MKFramework\Autoloader\Autoloader
+     */
     public static function init()
     {
         if (empty(self::$instance)) {
             self::$instance = new Autoloader();
             self::$instance->clientPaths = array();
             self::$instance->addLoaderPath(explode(PATH_SEPARATOR, get_include_path()));
-            self::$instance->addLoaderPath('/var/www/html/mktest.pl/projects/MKFramework');
+            
+            // self::$instance->addLoaderPath('/var/www/html/mktest.pl/projects/MKFramework');
         }
         self::initAutoloader();
         return self::$instance;
     }
 
-    static public function addLoaderPath($newPath)
+    /**
+     * Dodaje nową ścieżkę do kolekcji.
+     * 
+     * @param string|array $newPath pojedyncza ścieżka lub tablica ścieżek
+     */
+    public static function addLoaderPath($newPath)
     {
         if (is_array($newPath)) {
             foreach ($newPath as $path) {
@@ -33,17 +52,24 @@ class Autoloader
         self::initAutoloader();
     }
 
-    static public function getAutoloaderPaths()
+    /**
+     * Zwraca listę ścieżek w kolekcji autoloadera.
+     * 
+     * @return array
+     */
+    public static function getAutoloaderPaths()
     {
         return self::$instance->clientPaths;
     }
 
-    static private function initAutoloader()
+    
+    /**
+     * Metoda statyczna inicjująca obsługę autoloadera klas.
+     */
+    private static function initAutoloader()
     {
         spl_autoload_register(function ($className)
         {
-            
-            // $paths = explode(PATH_SEPARATOR, get_include_path());
             $paths = Autoloader::getAutoloaderPaths();
             
             $className = str_replace('MKFramework\\', '', $className);
@@ -54,7 +80,6 @@ class Autoloader
                 
                 if (file_exists($file2load)) {
                     require_once ($file2load);
-                    // echo 'wczytuje ' . $file2load . '<Br>';
                     return;
                 }
             }

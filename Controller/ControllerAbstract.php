@@ -2,18 +2,43 @@
 namespace MKFramework\Controller;
 
 use MKFramework\Director;
+use MKFramework\View\View;
+use MKFramework\View\Layout;
+use MKFramework\Router\RouterAbstract;
 
+/**
+ * Klasa abstrakcyjna dla kontrolerów w aplikacji.
+ *
+ * @author Marcin
+ *        
+ */
 abstract class ControllerAbstract
 {
 
+    /**
+     * @var Director
+     */
     protected $_director;
 
+    /**
+     * @var View
+     */
     protected $view;
 
+    /**
+     * @var Layout
+     */
     protected $layout;
 
+    /**
+     * @var RouterAbstract
+     */
     protected $_router;
 
+    
+    /**
+     * Konstruktor kontrolera.
+     */
     function __construct()
     {
         $this->_director = Director::getInstance();
@@ -22,27 +47,60 @@ abstract class ControllerAbstract
         $this->_router = Director::getRouter();
     }
 
+    /**
+     * Metoda pomocnicza zwracająca parametr lub wszystkie parametry z URL
+     * za pomocą instancji Routera.
+     * 
+     * @param string $param nazwa parametru w URL
+     * @return mixed
+     */
     protected function getParams($param)
     {
+        // Deleguje do obiektu Router
         return $this->_router->getParams($param);
     }
 
+    /**
+     * Metoda pomocnicza zwracająca wartość z formularza.
+     * 
+     * @param string $formFieldName
+     * @return mixed
+     */
     protected function getFormData($formFieldName)
     {
+        // Deleguje do obiektu Router
         return $this->_router->getFormData($formFieldName);
     }
 
+    /**
+     * Metoda sprawdzająca, czy dany http request jest POST
+     *  
+     * @return boolean
+     */
     protected function isPostRequest()
     {
         return $this->_router->isPostRequest();
     }
 
+    /**
+     * Metoda wykonywana przed wybranym Job
+     */
     protected function preLauncher()
     {}
 
+    /**
+     * Metoda wykonywana po Job
+     */
     protected function postLauncher()
     {}
 
+    
+    /**
+     * Metoda wywołująca wykonanie konrektnego Job w danym kontrolerze.
+     * 
+     * @param string $jobMethodName nazwa Job'a (akcji)
+     * @return string
+     */
     public function getJobContent($jobMethodName)
     {
         // wykonaj działania przed uruchomieniem akcji
@@ -62,25 +120,27 @@ abstract class ControllerAbstract
         // wyrenderuj zawartosc widoku
         $viewOutput = $this->view->render();
         
-        // uruchom dzia�ania po renderingu
+        // uruchom działania po renderingu
         $this->postLauncher();
-        
-        // wy�wietl wyrenderowany widok
-        // TODO docelowo tu ma tego nie by�
-        // TODO $this->view->show() // lub cos podobnego
         
         return $viewOutput;
     }
 
-    public function __call($actionName, $sec)
+    
+    /**
+     * Metoda magiczna wywoływana gdy nie znaleziono odpowiedniego Job w kontrolerze.
+     * @param string $jobName
+     * @param unknown $sec
+     */
+    public function __call($jobName, $sec)
     {
         // TODO rzuc wyjatek jesli wywolano nieistniejaca akcje
-        echo 'nie znaleziono akcji w tym kontrolerze <br><br><br>';
+        echo 'nie znaleziono podanego Job w tym kontrolerze <br><br><br>';
         
         echo 'module: ' . $this->_director->getModuleName() . '<br>';
         echo 'controller: ' . $this->_director->getControllerName() . '<br>';
         echo 'job: ' . $this->_director->getJobName() . '<br>';
         
-        // throw new \MKFramework\Exception\Exception("nie ma akcji <b>{$actionName}</b> w tym kontrolerze");
+        // throw new \MKFramework\Exception\Exception("nie ma Job <b>{$jobName}</b> w tym kontrolerze");
     }
 }

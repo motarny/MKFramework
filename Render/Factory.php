@@ -1,6 +1,8 @@
 <?php
 namespace MKFramework\Render;
 
+// TODO Dokumentacja
+
 class Factory
 {
 
