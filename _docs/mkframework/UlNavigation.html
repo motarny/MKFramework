@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos -->
+			<title>Docs For Class UlNavigation</title>
+			<link rel="stylesheet" href="../media/stylesheet.css" />
+			<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
+		</head>
+		<body>
+			<div class="page-body">			
+<h2 class="class-name">Class UlNavigation</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+													<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+						|											<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+						
+					</div>
+	<div class="info-box-body">
+        		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Klasa generująca kod HTML nawigacji z użyciem tagów UL i LI</p>
+	<ul class="tags">
+				<li><span class="field">author:</span> Marcin</li>
+			</ul>
+		<p class="notes">
+			Located in <a class="field" href="_Navigation---UlNavigation.php.html">/Navigation/UlNavigation.php</a> (line <span class="field">12</span>)
+		</p>
+		
+				
+		<pre><a href="../mkframework/NavigationAbstract.html">NavigationAbstract</a>
+   |
+   --UlNavigation</pre>
+	
+			</div>
+</div>
+
+
+
+	<a name="sec-var-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variable Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+						<span class="disabled">Vars</span> (<a href="#sec-vars">details</a>)
+							| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+								</div>
+		<div class="info-box-body">
+			<div class="var-summary">
+																																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$_cssClasses" title="details" class="var-name">$_cssClasses</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$_navigationElements" title="details" class="var-name">$_navigationElements</a>
+				</div>
+											</div>
+		</div>
+	</div>
+
+	<a name="sec-method-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Method Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+																		<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+				 
+				|
+						<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+		</div>
+		<div class="info-box-body">			
+			<div class="method-summary">
+																																												
+												<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#generateUlCell" title="details" class="method-name">generateUlCell</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$ulCell</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#renderNavigation" title="details" class="method-name">renderNavigation</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#tool_renderLiElement" title="details" class="method-name">tool_renderLiElement</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$element</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$level</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#tool_renderLink" title="details" class="method-name">tool_renderLink</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$element</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#tool_renderUlContent" title="details" class="method-name">tool_renderUlContent</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$nav</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$level</span>)
+									</div>
+								</div>
+		</div>
+	</div>		
+
+	<a name="sec-vars"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variables</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+										<a href="#sec-var-summary">Vars</a> (<span class="disabled">details</span>)
+						
+			
+										| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			<a name="var$_cssClasses" id="$_cssClasses"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$_cssClasses</span>
+			 = <span class="var-default">array(<br />        'levelPrefix' =&gt; 'level_',<br />        'ul' =&gt; 'ulclass',<br />        'rootUl' =&gt; 'root',<br />        'liLink' =&gt; 'link',<br />        'liNoLink' =&gt; 'noLink',<br />        'separator' =&gt; 'separator'<br />    )</span>			(line <span class="line-number">17</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+			<hr class="separator" />
+		<div class="notes">Redefinition of:</div>
+		<dl>
+			<dt><a href="../mkframework/NavigationAbstract.html#var$_cssClasses">NavigationAbstract::$_cssClasses</a></dt>
+					</dl>
+		
+		
+
+</div>
+<a name="var$_navigationElements" id="$_navigationElements"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$_navigationElements</span>
+						(line <span class="line-number">15</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+			<hr class="separator" />
+		<div class="notes">Redefinition of:</div>
+		<dl>
+			<dt><a href="../mkframework/NavigationAbstract.html#var$_navigationElements">NavigationAbstract::$_navigationElements</a></dt>
+					</dl>
+		
+		
+
+</div>
+							<h4>Inherited Variables</h4>
+				<A NAME='inherited_vars'><!-- --></A>
+									<p>Inherited from <span class="classname"><a href="../mkframework/NavigationAbstract.html">NavigationAbstract</a></span></p>
+					<blockquote>
+													<span class="var-title">
+								<span class="var-name"><a href="../mkframework/NavigationAbstract.html#var$_multilang">NavigationAbstract::$_multilang</a></span><br>
+							</span>
+											</blockquote> 
+										
+		</div>
+	</div>
+	
+	<a name="sec-methods"></a>
+	<div class="info-box">
+		<div class="info-box-title">Methods</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+															<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+																	<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
+						
+		</div>
+		<div class="info-box-body">
+			<A NAME='method_detail'></A>
+
+<a name="methodgenerateUlCell" id="generateUlCell"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">generateUlCell</span> (line <span class="line-number">99</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			generateUlCell
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$ulCell</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$ulCell</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodrenderNavigation" id="renderNavigation"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">renderNavigation</span> (line <span class="line-number">27</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			renderNavigation
+		</span>
+				()
+			</div>
+	
+		
+			<hr class="separator" />
+		<div class="notes">Redefinition of:</div>
+		<dl>
+			<dt><a href="../mkframework/NavigationAbstract.html#methodrenderNavigation">NavigationAbstract::renderNavigation()</a></dt>
+					</dl>
+			
+	</div>
+<a name="methodtool_renderLiElement" id="tool_renderLiElement"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">tool_renderLiElement</span> (line <span class="line-number">63</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			tool_renderLiElement
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$element</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$level</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$element</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$level</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodtool_renderLink" id="tool_renderLink"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">tool_renderLink</span> (line <span class="line-number">86</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			tool_renderLink
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$element</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$element</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodtool_renderUlContent" id="tool_renderUlContent"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">tool_renderUlContent</span> (line <span class="line-number">46</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			tool_renderUlContent
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$nav</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$level</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$nav</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$level</span>			</li>
+				</ul>
+		
+			
+	</div>
+							<h4>Inherited Methods</h4>
+				<a name='inherited_methods'><!-- --></a>	
+									<!-- =========== Summary =========== -->
+					<p>Inherited From <span class="classname"><a href="../mkframework/NavigationAbstract.html">NavigationAbstract</a></span></p>
+					<blockquote>
+													<span class="method-name"><a href="../mkframework/NavigationAbstract.html#method__construct">NavigationAbstract::__construct()</a></span><br>
+													<span class="method-name"><a href="../mkframework/NavigationAbstract.html#methodrenderNavigation">NavigationAbstract::renderNavigation()</a></span><br>
+													<span class="method-name"><a href="../mkframework/NavigationAbstract.html#methodsetCssClasses">NavigationAbstract::setCssClasses()</a></span><br>
+													<span class="method-name"><a href="../mkframework/NavigationAbstract.html#methodsetMultilangInstance">NavigationAbstract::setMultilangInstance()</a></span><br>
+													<span class="method-name"><a href="../mkframework/NavigationAbstract.html#methodsetNavigationElements">NavigationAbstract::setNavigationElements()</a></span><br>
+													<span class="method-name"><a href="../mkframework/NavigationAbstract.html#methodtranslate">NavigationAbstract::translate()</a></span><br>
+											</blockquote>
+										
+		</div>
+	</div>
+
+
+	<p class="notes" id="credit">
+		Documentation generated on Fri, 12 Sep 2014 16:19:46 +0200 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.4</a>
+	</p>
+	</div></body>
+</html>

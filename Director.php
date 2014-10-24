@@ -7,6 +7,8 @@ use MKFramework\Router\RouterAbstract;
 use MKFramework\View;
 use MKFramework\Session\Session;
 use MKFramework\Multilang\MultilangAbstract;
+use MKFramework\Reflex\Reflex;
+use MKFramework\Reflex\ReflexManager;
 
 /**
  * Klasa Director służy do wygenerowania i obsługi singletona Director.
@@ -103,6 +105,14 @@ class Director
         
         Director::getLayout()->setLayoutFile('default');
         Director::getView()->setJobContent($jobContent);
+        
+        
+        ReflexManager::setStatus(Director::getAppConfig('reflexEnabled'));
+        if (ReflexManager::isEnabled())
+        {
+            ReflexManager::addDefaultContent($controllerClassName, $launchJob);
+        }
+        
         
         
         // Zwróć wynik.

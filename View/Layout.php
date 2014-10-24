@@ -3,7 +3,10 @@ namespace MKFramework\View;
 
 // TODO Dokumentacja
 
+use MKFramework;
 use MKFramework\Director;
+use MKFramework\Reflex\ReflexManager;
+
 
 class Layout extends TemplateServiceAbstract
 {
@@ -28,6 +31,12 @@ class Layout extends TemplateServiceAbstract
             $layout = $this;
             ob_start();
             include $this->_layoutFileFullPath;
+            
+            if (ReflexManager::isEnabled())
+            {
+                echo ReflexManager::publishReflex();
+            }
+            
             $cont = ob_get_clean();
             
             return $cont;
